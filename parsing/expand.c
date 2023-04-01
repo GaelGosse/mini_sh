@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:21:41 by gael              #+#    #+#             */
-/*   Updated: 2023/03/16 14:17:32 by gael             ###   ########.fr       */
+/*   Updated: 2023/04/01 19:00:54 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 	save2 = (*i_replace);
 	var_name = ft_strdup_len(mini_sh->rl_out->word, (save + 1), (*i_replace));
 	final_var = ft_find_var_env(mini_sh->env, var_name);
+	printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", var_name, var_name);
 	free(var_name);
 	if (final_var)
 		final_var = ft_strjoin_dfree(ft_strdup_len(mini_sh->rl_out->word, 0, save), final_var);
@@ -82,23 +83,18 @@ int	ft_isthere_dollar(t_mini_sh *mini_sh)
 	while (mini_sh->rl_out->word[++i_isdollar])
 	{
 		toggle_quote(mini_sh, mini_sh->rl_out->word[i_isdollar]);
-		if ((mini_sh->is_dquote == SUCCESS || (mini_sh->is_dquote == FAIL && mini_sh->is_squote == FAIL)) && mini_sh->rl_out->word[i_isdollar] != '"' && mini_sh->rl_out->word[i_isdollar] != '\'')
+		if ((mini_sh->is_dquote == SUCCESS || (mini_sh->is_dquote == FAIL && \
+		mini_sh->is_squote == FAIL)) && mini_sh->rl_out->word[i_isdollar] \
+		!= '"' && mini_sh->rl_out->word[i_isdollar] != '\'')
 		{
-			if (mini_sh->rl_out->word[i_isdollar] == '$' && (valid_id(mini_sh->rl_out->word[i_isdollar + 1]) == SUCCESS))
+			if (mini_sh->rl_out->word[i_isdollar] == '$' \
+			&& (valid_id(mini_sh->rl_out->word[i_isdollar + 1]) == SUCCESS))
 			{
 				rtn_val = i_isdollar;
 			}
 		}
 	}
 	return (rtn_val);
-	(void)i_isdollar;
-	(void)mini_sh;
-}
-
-void	init_quote(t_mini_sh *mini_sh)
-{
-	mini_sh->is_squote = FAIL;
-	mini_sh->is_dquote = FAIL;
 }
 
 void	toggle_quote(t_mini_sh *mini_sh, char chr)

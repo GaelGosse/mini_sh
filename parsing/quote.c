@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:53:30 by gael              #+#    #+#             */
-/*   Updated: 2023/03/16 00:13:13 by gael             ###   ########.fr       */
+/*   Updated: 2023/04/01 18:54:51 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ int	check_quote_is_closed(char *line)
 		}
 	}
 	return (len);
+}
+
+void	init_quote(t_mini_sh *mini_sh)
+{
+	mini_sh->is_squote = FAIL;
+	mini_sh->is_dquote = FAIL;
 }
 
 // void	toggle_quote(t_mini_sh *mini_sh, char chr)

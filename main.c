@@ -29,26 +29,32 @@ void	init_env_2(char **envp, t_mini_sh *mini_sh)
 	mini_sh->env[env_length] = 0;
 }
 
-void	init_rl(t_mini_sh *mini_sh)
+void	init_prpt(t_mini_sh *mini_sh)
 {
 	mini_sh->output = readline("minishell>");
 	mini_sh->sep = 0;
 	mini_sh->sep_2 = 0;
-	(void)mini_sh;
+	mini_sh->sep_type = NULL;
+	mini_sh->prepare_exec = NULL;
+	mini_sh->prepare_exec_type = NULL;
+	(void)mini_sh;	
 }
 
 int	main(int argc, char *argv[], char **envp)
 {
 	t_mini_sh	mini_sh;
 
+	if (argc != 1)
+		return (printf("minishell won't take any arguments"), 2);
 	mini_sh.output = NULL;
 	init_env_2(envp, &mini_sh);
 	while (1)
 	{
-		init_rl(&mini_sh);
+		init_prpt(&mini_sh);
 		if (!mini_sh.output)
 		{
 			printf("@exit\n");
+			free_all(&mini_sh);
 			break ;
 		}
 		if (mini_sh.output[0])
@@ -58,21 +64,12 @@ int	main(int argc, char *argv[], char **envp)
 		{
 			init_sep_type(&mini_sh);
 			init_exec(&mini_sh);
-			// if (mini_sh.sep_2 > 0)
-			// {
-			// 	printf("hehe22\n");
-			// }
 			init_tab_fd(&mini_sh);
 			start_exec(&mini_sh);
-			// if (do_built_in(&mini_sh) == FAIL)
-			// 	exec_cmd(&mini_sh);
 		}
-		free(mini_sh.output),
-		mini_sh.output = NULL;
-		free_parsing(&mini_sh);
+		free_each_prpt(&mini_sh);
 	}
-	free_env(&mini_sh);
-	(void)argc;
+	free_all(&mini_sh);
 	(void)argv;
 	return (0);
 }

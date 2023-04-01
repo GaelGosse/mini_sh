@@ -40,6 +40,8 @@ built_in/built_in_utils.c \
 signal/exec_signal.c \
 signal/handle_ctrl_c.c \
 free/free_parsing.c \
+free/free_exec.c \
+free/free_all.c \
 parsing/expand.c \
 parsing/parsing.c \
 parsing/set_type.c \
@@ -60,6 +62,7 @@ exec/sep_test.c \
 exec/redir_r.c \
 exec/redir_l.c \
 exec/append.c \
+
 
 # ls -l -a | /usr/bin/grep -ion s > sqve | echo abc"' $USER'"def$ic >> ./sqve | cat << abc > outfile 
 # echo abc'" $USER$$ic$TERM"'def$ic | echo abc"' $USER$$ic$TERM'"def

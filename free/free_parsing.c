@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:56:00 by gael              #+#    #+#             */
-/*   Updated: 2023/03/15 23:44:58 by gael             ###   ########.fr       */
+/*   Updated: 2023/04/01 18:39:46 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_lstclear(t_parse **lst)
 
 void	free_parsing(t_mini_sh *mini_sh)
 {
+	// if (mini_sh->rl_out)
+	// 	ft_lstclear(&mini_sh->rl_out);
 	if (mini_sh->output)
 	{
 		free(mini_sh->output);
@@ -38,16 +40,34 @@ void	free_parsing(t_mini_sh *mini_sh)
 		if (mini_sh->rl_out)
 			ft_lstclear(&mini_sh->rl_out);
 	}
+	// if (mini_sh->rl_out)
+	// 	ft_lstclear(&mini_sh->rl_out);
 }
 
 void	free_env(t_mini_sh *mini_sh)
 {
 	int	ite_free_env;
-
 	ite_free_env = -1;
-	while (mini_sh->env[++ite_free_env])
-		free(mini_sh->env[ite_free_env]);
-	free(mini_sh->env);
+	if (mini_sh->env)
+	{
+		while (mini_sh->env[++ite_free_env])
+		{
+			if (mini_sh->env[ite_free_env])
+			{
+				free(mini_sh->env[ite_free_env]);
+				mini_sh->env[ite_free_env] = NULL;
+			}
+		}
+		free(mini_sh->env);
+		mini_sh->env = NULL;
+	}
+	ite_free_env = -1;
+	if (mini_sh->data && mini_sh->data->env_sorted)
+	{
+		while (mini_sh->data->env_sorted[++ite_free_env])
+			free(mini_sh->data->env_sorted[ite_free_env]);
+		free(mini_sh->data->env_sorted);
+	}
 }
 
 void	ft_free_all(char *str, char **tab)

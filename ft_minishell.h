@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlamarcq <mlamarcq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:14:58 by gael              #+#    #+#             */
-/*   Updated: 2023/03/31 17:03:57 by mlamarcq         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:09:57 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int		envp_size(char **envp);
 char	*ft_getenv(char *str);
 //main.c
 void	init_env_2(char **envp, t_mini_sh *mini_sh);
-void	init_rl(t_mini_sh *mini_sh);
+void	init_prpt(t_mini_sh *mini_sh);
 //exec/which_sep.c
 int		if_redir_l(t_mini_sh *mini_sh);
 int		if_redir_r(t_mini_sh *mini_sh, int i_exec);
@@ -238,7 +238,7 @@ void	init_res_var(char **res_varenv, int *save, int *i_char, int *i_env);
 //parsing/remove_quote_2.c
 int		isthere_quote(t_mini_sh *mini_sh);
 void	remove_quote_2(t_mini_sh *mini_sh);
-char	*write_without_qt_2(char *str);
+char	*write_without_qt(char *str);
 //parsing/print.c
 void	ft_print_rl_out(t_mini_sh *mini_sh);
 void	print_type(int type);
@@ -288,29 +288,33 @@ int		export_cd(char **str, t_mini_sh *mini_sh);
 void	export_home(char *home, t_mini_sh *mini_sh);
 int		ft_cd(char **str, t_mini_sh *mini_sh);
 void	replace_pwd(t_mini_sh *mini_sh, int *is_exist, char *oldpwd);
-int	there_is_a_heredoc(t_mini_sh *mini_sh, int i_exec);
+int		there_is_a_heredoc(t_mini_sh *mini_sh, int i_exec);
 //int	create_heredoc(t_mini_sh *mini_sh, int i);
-int	ft_itoa_len(int n);
+int		ft_itoa_len(int n);
 char	*ft_itoa(int n);
-int	do_simple_heredoc(t_mini_sh *mini_sh, int i_exec);
+int		do_simple_heredoc(t_mini_sh *mini_sh, int i_exec);
 void	ft_putstr_fd(char *s, int fd);
 void	if_hr_doc(t_mini_sh *mini_sh);
 void	do_redir_r(t_mini_sh *mini_sh, int i_exec);
-int	if_redir(t_mini_sh *mini_sh, int i_exec);
-int	when_arg_after_file(t_mini_sh *mini_sh, int i_exec);
-int	check_redir_l_error(t_mini_sh *mini_sh);
-int	do_redir_l(t_mini_sh *mini_sh, int i_exec);
-int	check_redi_r_append_error(t_mini_sh *mini_sh);
-int	check_redi_r_append_error_2(t_mini_sh *mini_sh);
-int	check_redi_r_append_error_1(t_mini_sh *mini_sh);
-void    print_prep_exec(t_mini_sh *mini_sh);
-void    free_exectype(t_mini_sh *mini_sh);
-int print_error(int index, t_parse *tmp);
+int		if_redir(t_mini_sh *mini_sh, int i_exec);
+int		when_arg_after_file(t_mini_sh *mini_sh, int i_exec);
+int		check_redir_l_error(t_mini_sh *mini_sh);
+int		do_redir_l(t_mini_sh *mini_sh, int i_exec);
+int		check_redi_r_append_error(t_mini_sh *mini_sh);
+int		check_redi_r_append_error_2(t_mini_sh *mini_sh);
+int		check_redi_r_append_error_1(t_mini_sh *mini_sh);
+void	print_prep_exec(t_mini_sh *mini_sh);
+void	free_exectype(t_mini_sh *mini_sh);
+int		print_error(int index, t_parse *tmp);
 void	do_append(t_mini_sh *mini_sh, int i_exec);
-int if_append(t_mini_sh *mini_sh, int i_init_fd);
-int	opening_redir_r_file(t_mini_sh *mini_sh, t_parse *tmp, int i_init_fd);
-int if_redir_r(t_mini_sh *mini_sh, int i_init_fd);
-int	is_sep_int(int type);
-
+int		if_append(t_mini_sh *mini_sh, int i_init_fd);
+int		opening_redir_r_file(t_mini_sh *mini_sh, t_parse *tmp, int i_init_fd);
+int		if_redir_r(t_mini_sh *mini_sh, int i_init_fd);
+int		is_sep_int(int type);
+void	free_type(t_mini_sh *mini_sh);
+void	free_each_prpt(t_mini_sh *mini_sh);
+void	free_all(t_mini_sh *mini_sh);
+void	close_all(t_mini_sh *mini_sh);
+void	end_prepare_exec(t_mini_sh *mini_sh, int triple);
 
 #endif

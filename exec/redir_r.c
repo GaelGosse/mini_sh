@@ -35,7 +35,7 @@ int	rdr_r(t_parse *tmp, t_mini_sh *mini_sh)
 		// printf("salut\n");
 		// close()
 		mini_sh->exec->fd_r = open(tmp->next->word, O_CREAT | O_TRUNC| O_RDWR, 0644);
-		printf(BOLD_RED"	%s\n"RST"---\n", tmp->next->word);
+		// printf(BOLD_RED"	%s\n"RST"---\n", tmp->next->word);
 		if (mini_sh->exec->fd_r == FAIL)
 			return (printf("Failure during opening redir_r file\n"), FAIL);
 	}
@@ -71,7 +71,7 @@ int	opening_redir_r_file(t_mini_sh *mini_sh, t_parse *tmp, int i_init_fd)
 	// tmp = mini_sh->rl_out_head;
 	// while (tmp)
 	// {
-		printf(BOLD_RED"	%s\n"RST"---\n", tmp->word);
+		// printf(BOLD_RED"	%s\n"RST"---\n", tmp->word);
 		if (rdr_r(tmp, mini_sh) == FAIL)
 			return (FAIL);
 		if (rdr_app(tmp, mini_sh) == FAIL)

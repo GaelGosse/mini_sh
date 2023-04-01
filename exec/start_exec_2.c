@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlamarcq <mlamarcq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:33:14 by mael              #+#    #+#             */
-/*   Updated: 2023/03/31 17:09:20 by mlamarcq         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:20:28 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	exec_cmd(t_mini_sh *mini_sh, int i_exec)
 			return ;
 		else
 		{
-			printf("minishell:%s: command not found\n", mini_sh->prepare_exec[i_exec][0]);
+			printf("minishell:%s: command not found\n", \
+			mini_sh->prepare_exec[i_exec][0]);
+			free_all(mini_sh);
 			exit (127);
 		}
 	}
@@ -87,7 +89,6 @@ void	exec_cmd(t_mini_sh *mini_sh, int i_exec)
 // 	return (SUCCESS);
 // 	(void)i_init_fd;
 // }
-
 
 int	init_tab_fd(t_mini_sh *mini_sh)
 {
@@ -172,16 +173,16 @@ int	init_fd_exec(t_mini_sh *mini_sh, int i_exec)
 
 void	close_all(t_mini_sh *mini_sh)
 {
-	int i;
+	int	i_close_pipe;
 
-	i = 0;
-	while (i < mini_sh->sep_2)
+	i_close_pipe = 0;
+	while (i_close_pipe < mini_sh->sep_2)
 	{
-		if (mini_sh->exec->tab_fd[i][0] > 2)
-			close(mini_sh->exec->tab_fd[i][0]);
-		if (mini_sh->exec->tab_fd[i][1] > 2)
-			close(mini_sh->exec->tab_fd[i][1]);
-		i++;
+		if (mini_sh->exec->tab_fd[i_close_pipe][0] > 2)
+			close(mini_sh->exec->tab_fd[i_close_pipe][0]);
+		if (mini_sh->exec->tab_fd[i_close_pipe][1] > 2)
+			close(mini_sh->exec->tab_fd[i_close_pipe][1]);
+		i_close_pipe++;
 	}
 }
 
@@ -222,15 +223,16 @@ int	start_exec(t_mini_sh *mini_sh)
 			mini_sh->pids[i_exec] = FAIL;
 		i_exec++;
 	}
-	i_exec = 0;
-	while (i_exec < mini_sh->sep_2)
-	{
-		if (mini_sh->exec->tab_fd[i_exec][0] > 2)
-			close(mini_sh->exec->tab_fd[i_exec][0]);
-		if (mini_sh->exec->tab_fd[i_exec][1] > 2)
-			close(mini_sh->exec->tab_fd[i_exec][1]);
-		i_exec++;
-	}
+	close_all(mini_sh);
+	// i_exec = 0;
+	// while (i_exec < mini_sh->sep_2)
+	// {
+	// 	if (mini_sh->exec->tab_fd[i_exec][0] > 2)
+	// 		close(mini_sh->exec->tab_fd[i_exec][0]);
+	// 	if (mini_sh->exec->tab_fd[i_exec][1] > 2)
+	// 		close(mini_sh->exec->tab_fd[i_exec][1]);
+	// 	i_exec++;
+	// }
 	i_exec = 0;
 	while (mini_sh->prepare_exec[i_exec])
 	{

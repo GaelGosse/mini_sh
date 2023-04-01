@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/01 18:47:28 by ggosse            #+#    #+#             */
+/*   Updated: 2023/04/01 18:48:09 by ggosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_minishell.h"
 
 int	check_redi_r_append_error_1(t_mini_sh *mini_sh)
@@ -31,7 +43,7 @@ int	check_redi_r_append_error_1(t_mini_sh *mini_sh)
 
 int	check_redi_r_append_error_2(t_mini_sh *mini_sh)
 {
-	t_parse *tmp;
+	t_parse	*tmp;
 
 	tmp = mini_sh->rl_out_head;
 	while (tmp)
@@ -39,7 +51,8 @@ int	check_redi_r_append_error_2(t_mini_sh *mini_sh)
 		if (tmp->type == REDIR_R || tmp->type == APPEND)
 		{
 			tmp = tmp->next;
-			if ((tmp->type == _FILE && (access(tmp->word, W_OK) == 0)) || tmp->type == ARG)
+			if ((tmp->type == _FILE \
+			&& (access(tmp->word, W_OK) == 0)) || tmp->type == ARG)
 			{
 				if (tmp->next && (is_sep(tmp->next->word) == FAIL))
 				{
@@ -62,7 +75,7 @@ int	check_redi_r_append_error(t_mini_sh *mini_sh)
 	return (SUCCESS);
 }
 
-int print_error(int index, t_parse *tmp)
+int	print_error(int index, t_parse *tmp)
 {
 	if (index == 1)
 	{
@@ -88,9 +101,3 @@ int print_error(int index, t_parse *tmp)
 	}
 	return (SUCCESS);
 }
-
-
-// int redir_error(t_mini_sh *mini_sh)
-// {
-
-// }
