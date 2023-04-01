@@ -6,16 +6,11 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:21:41 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 19:00:54 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:17:15 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_minishell.h"
-
-// int	len_word_replace(int end1, int start2, int end2)
-// {
-	
-// }
 
 void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 {
@@ -36,7 +31,7 @@ void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 	save2 = (*i_replace);
 	var_name = ft_strdup_len(mini_sh->rl_out->word, (save + 1), (*i_replace));
 	final_var = ft_find_var_env(mini_sh->env, var_name);
-	printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", var_name, var_name);
+	printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", var_nameact, var_nameact);
 	free(var_name);
 	if (final_var)
 		final_var = ft_strjoin_dfree(ft_strdup_len(mini_sh->rl_out->word, 0, save), final_var);
@@ -49,9 +44,6 @@ void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 	free(mini_sh->rl_out->word);
 	mini_sh->rl_out->word = ft_strdup(final_var);
 	free(final_var);
-	(void)save2;
-	(void)var_name;
-	(void)mini_sh;
 }
 
 int	interpreted(t_mini_sh *mini_sh)

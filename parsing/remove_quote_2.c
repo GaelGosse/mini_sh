@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 23:19:01 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 16:12:01 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:17:25 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*write_without_qt(char *str)
 	char	*str_wo_qt;
 	int		i_act;
 	int		last_qt;
-	int	i_start;
-	int	i_end;
+	int		i_start;
+	int		i_end;
 
 	i_end = 0;
 	i_start = 0;

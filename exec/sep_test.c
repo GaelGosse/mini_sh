@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sep_test.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/01 19:19:30 by ggosse            #+#    #+#             */
+/*   Updated: 2023/04/01 19:19:35 by ggosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_minishell.h"
 
 void	if_hr_doc(t_mini_sh *mini_sh)
@@ -9,9 +21,6 @@ void	if_hr_doc(t_mini_sh *mini_sh)
 	{
 		if (tmp->type == HR_DOC)
 		{
-			///printf("lol\n");
-			// printf(RED"tmp->next = %s"RST"\n", tmp->next->word);
-			// printf(RED"tmp->next = %s"RST"\n", tmp->next->next->word);
 			if (tmp->next && tmp->next->next && tmp->next->next->word)
 				mini_sh->sep_2++;
 		}

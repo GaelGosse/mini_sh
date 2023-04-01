@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   child_process.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/01 19:20:03 by ggosse            #+#    #+#             */
+/*   Updated: 2023/04/01 19:20:13 by ggosse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_minishell.h"
 
 char	*ft_find_cmd_2(t_mini_sh *mini_sh, int ite_env, char *cmd_to_find)
@@ -19,7 +31,6 @@ char	*ft_find_cmd_2(t_mini_sh *mini_sh, int ite_env, char *cmd_to_find)
 		if (access(cmd_path_absolue, X_OK) == 0)
 		{
 			ft_free_all(cmd, path_cmd);
-			//printf(GREEN"cmd = %s\n"RST, cmd_path_absolue);
 			return (cmd_path_absolue);
 		}
 		else
