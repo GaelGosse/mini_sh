@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:43:09 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 19:17:04 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:25:13 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_prpt(t_mini_sh *mini_sh)
 	mini_sh->sep_type = NULL;
 	mini_sh->prepare_exec = NULL;
 	mini_sh->prepare_exec_type = NULL;
+	mini_sh->data = NULL;
 	(void)mini_sh;	
 }
 

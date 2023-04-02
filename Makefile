@@ -42,6 +42,7 @@ signal/handle_ctrl_c.c \
 free/free_parsing.c \
 free/free_exec.c \
 free/free_all.c \
+free/free_env.c \
 parsing/expand.c \
 parsing/parsing.c \
 parsing/set_type.c \

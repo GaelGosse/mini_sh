@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:14:58 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 17:09:57 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:59:52 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_list
 	char				*line;
 	int					index;
 	struct s_list		*next;
-}   t_list;
+}						t_list;
 
 typedef struct s_arr_output
 {
@@ -61,7 +61,7 @@ typedef struct s_arr_output
 	int					type;
 	struct s_arr_output	*next;
 	struct s_arr_output *prev;
-}		t_parse;
+}						t_parse;
 
 // typedef struct s_mini_sh
 // {
@@ -246,8 +246,8 @@ void	print_word(char *new_w);
 void	print_word2(char *new_w);
 //parsing/quote.c
 int		check_quote_is_closed(char *line);
-void	count_quote_arg(char *line, int *ite, int quote);
-int		count_word(char *line);
+void	count_quote_arg(char *line, int *ite);
+// int		count_word(char *line);
 int		quote_is_closed(char *line, int *ite, int quote);
 //parsing/parsing.c
 int		build_result_output(t_mini_sh *mini_sh, char *line);
@@ -316,5 +316,7 @@ void	free_each_prpt(t_mini_sh *mini_sh);
 void	free_all(t_mini_sh *mini_sh);
 void	close_all(t_mini_sh *mini_sh);
 void	end_prepare_exec(t_mini_sh *mini_sh, int triple);
+void	free_env_sorted(t_mini_sh *mini_sh);
+void	free_data(t_mini_sh *mini_sh);
 
 #endif

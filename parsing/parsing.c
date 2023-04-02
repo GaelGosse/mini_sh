@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:10:55 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 16:43:54 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 18:43:03 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,45 @@ int	is_built_in(t_mini_sh *mini_sh)
 	return (FAIL);
 }
 
+char	*is_glue(char *line)
+{
+	int	ite;
+	int	glue;
+
+	glue = 0;
+	ite = 0;
+	while (line[ite])
+	{
+		while (ft_is_sep_parse(line[ite]) == SUCCESS)
+			ite++;
+		while (line[ite] != '\0' && ft_is_sep_parse(line[ite]) == FAIL)
+		{
+			count_quote_arg(line, &ite);
+			// if ((line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
+			// && (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL))
+			// {
+			// 	printf(RED"all"RESET"\n");
+			// }
+			// else
+			if (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL)
+			{
+				printf(RED"letter left"RESET"\n");
+				glue = ite;
+				printf(BOLD_RED"->%s"RST"\n", ft_strdup_len(line, 0, glue));
+			}
+			else if (line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
+			{
+				printf(RED"letter right"RESET"\n");
+				glue = ite + 1;
+				printf(BOLD_RED"->%s"RST"\n", ft_strdup_len(line, 0, glue));
+			}
+			ite++;
+		}
+	}
+	(void)glue;
+	return (line);
+}
+
 void	put_word_in_minish(t_mini_sh *mn_sh, char *lne, int *save, int *ite)
 {
 	t_parse	*new;
@@ -62,9 +101,15 @@ int	build_result_output(t_mini_sh *mini_sh, char *line)
 {
 	int	ite;
 	int	save;
+	int	abc;
+	// int	glue;
 
+	// glue = 0;
 	mini_sh->rl_out = NULL;
 	save = 0;
+	abc = 0;
+	while (line[abc])
+		abc++;
 	ite = 0;
 	while (line[ite])
 	{
@@ -73,12 +118,37 @@ int	build_result_output(t_mini_sh *mini_sh, char *line)
 		save = ite;
 		while (line[ite] != '\0' && ft_is_sep_parse(line[ite]) == FAIL)
 		{
-			count_quote_arg(line, &ite, D_QUOTE);
-			count_quote_arg(line, &ite, S_QUOTE);
+			count_quote_arg(line, &ite);
+			// if ((line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
+			// && (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL))
+			// {
+			// 	printf(RED"all"RESET"\n");
+			// 	put_word_in_minish(mini_sh, line, &save, &ite);
+			// }
+			// else if (line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
+			// {
+			// 	printf(RED"letter right"RESET"\n");
+			// 	glue = ite + 1;
+			// 	printf(BOLD_RED"->%s"RST"\n", ft_strdup_len(line, ite, glue));
+			// 	put_word_in_minish(mini_sh, line, &ite, &glue);
+			// }
+			// else if (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL)
+			// {
+			// 	printf(RED"letter left"RESET"\n");
+			// 	glue = ite + 1;
+			// 	printf(BOLD_RED"->%s"RST"\n", ft_strdup_len(line, ite, glue));
+			// 	put_word_in_minish(mini_sh, line, &ite, &glue);
+			// }
 			ite++;
 		}
-		put_word_in_minish(mini_sh, line, &save, &ite);
+		if (abc == ite)
+			put_word_in_minish(mini_sh, line, &save, &ite);
+		else if (0 == ite)
+			put_word_in_minish(mini_sh, line, &save, &ite);
+		else
+			put_word_in_minish(mini_sh, line, &save, &ite);
 	}
+	// (void)glue;
 	return (SUCCESS);
 }
 
@@ -88,6 +158,7 @@ int	ft_parsing(t_mini_sh *mini_sh)
 	mini_sh->is_squote = FAIL;
 	if (check_quote_is_closed(mini_sh->output) > 0)
 	{
+		// mini_sh->output = is_glue(mini_sh->output);
 		if (build_result_output(mini_sh, mini_sh->output) < 0)
 			return (FAIL);
 		expand(mini_sh);

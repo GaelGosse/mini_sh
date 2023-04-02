@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:33:14 by mael              #+#    #+#             */
-/*   Updated: 2023/04/01 17:20:28 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 18:59:17 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exec_cmd(t_mini_sh *mini_sh, int i_exec)
 	}
 	else
 	{
-		if (mini_sh->sep_type[i_exec - 1] != PIPE)
+		if (mini_sh->len_prepare_exec > 1 && mini_sh->sep_type[i_exec - 1] != PIPE)
 			return ;
 		else
 		{
@@ -198,6 +198,7 @@ void	child_process(t_mini_sh *mini_sh, int i_exec)
 	close_all(mini_sh);
 	if (exec_builtin(mini_sh, i_exec) == FAIL)
 		exec_cmd(mini_sh, i_exec);
+	free_all(mini_sh);
 	exit (1);
 }
 

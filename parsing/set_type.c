@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 23:12:05 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 18:48:52 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 17:29:47 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	type_utils_4(t_mini_sh *mini_sh)
 	{
 		if (ft_strlen(mini_sh->rl_out->word) == 1)
 			mini_sh->rl_out->type = PIPE;
-		else
-			return (printf("minishell: syntax error with |"), FAIL);
+		// else
+		// 	return (printf("minishell: syntax error with |"), FAIL);
 	}
 	else if (ft_strncmp("-", mini_sh->rl_out->word, 0) == 0
 		&& mini_sh->rl_out->type == FAIL)

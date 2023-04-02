@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:21:41 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 19:17:15 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 16:44:29 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 	save2 = (*i_replace);
 	var_name = ft_strdup_len(mini_sh->rl_out->word, (save + 1), (*i_replace));
 	final_var = ft_find_var_env(mini_sh->env, var_name);
-	printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", var_nameact, var_nameact);
+	printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", var_name, var_name);
 	free(var_name);
 	if (final_var)
 		final_var = ft_strjoin_dfree(ft_strdup_len(mini_sh->rl_out->word, 0, save), final_var);
@@ -43,6 +43,7 @@ void	replace_dollar(t_mini_sh * mini_sh, int *i_replace)
 	final_var = ft_strjoin_dfree(final_var, ft_strdup_len(mini_sh->rl_out->word, save2, (*i_replace)));
 	free(mini_sh->rl_out->word);
 	mini_sh->rl_out->word = ft_strdup(final_var);
+	printf(BOLD_YELLOW"%p: "YELLOW"%s"RESET"\n", mini_sh->rl_out->word, mini_sh->rl_out->word);
 	free(final_var);
 }
 
@@ -64,7 +65,7 @@ int	interpreted(t_mini_sh *mini_sh)
 	(void)i_isdollar;
 	(void)mini_sh;
 }
-
+// echo $$$USER$
 int	ft_isthere_dollar(t_mini_sh *mini_sh)
 {
 	int	i_isdollar;
@@ -74,18 +75,22 @@ int	ft_isthere_dollar(t_mini_sh *mini_sh)
 	i_isdollar = -1;
 	while (mini_sh->rl_out->word[++i_isdollar])
 	{
+
+		// printf(PURPLE"%c: %i"RESET"\n", mini_sh->rl_out->word[i_isdollar], i_isdollar);
 		toggle_quote(mini_sh, mini_sh->rl_out->word[i_isdollar]);
 		if ((mini_sh->is_dquote == SUCCESS || (mini_sh->is_dquote == FAIL && \
 		mini_sh->is_squote == FAIL)) && mini_sh->rl_out->word[i_isdollar] \
 		!= '"' && mini_sh->rl_out->word[i_isdollar] != '\'')
 		{
-			if (mini_sh->rl_out->word[i_isdollar] == '$' \
-			&& (valid_id(mini_sh->rl_out->word[i_isdollar + 1]) == SUCCESS))
+			if (mini_sh->rl_out->word[i_isdollar] == '$' && (valid_id(mini_sh->rl_out->word[i_isdollar + 1]) == SUCCESS))
 			{
+				printf(BOLD_GREEN"%c: "GREEN"%i"RESET"\n", mini_sh->rl_out->word[i_isdollar + 1], valid_id(mini_sh->rl_out->word[i_isdollar + 1]));
 				rtn_val = i_isdollar;
+				break ;
 			}
 		}
 	}
+	// printf("---------------------------\n");
 	return (rtn_val);
 }
 
@@ -120,6 +125,7 @@ void	expand(t_mini_sh *mini_sh)
 		while (i_dollar != -1)
 		{
 			init_quote(mini_sh);
+			// printf(BOLD_GREEN"%p: "GREEN"%s"RESET"\n", mini_sh->rl_out->word, mini_sh->rl_out->word);
 			replace_dollar(mini_sh, &i_dollar);
 			// interpreted(mini_sh);
 			init_quote(mini_sh);

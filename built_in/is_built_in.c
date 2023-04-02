@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:10:09 by mael              #+#    #+#             */
-/*   Updated: 2023/04/01 19:01:13 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/02 20:04:04 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	is_built_in_2(int i, t_mini_sh *mini_sh)
 int	do_built_in(t_mini_sh *mini_sh, int i)
 {
 //	int	i;
-
+	free_env_sorted(mini_sh);
+	free_data(mini_sh);
 	init_env(mini_sh);
 	init_env_sorted(mini_sh);
 //	i = 0;
