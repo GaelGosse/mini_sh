@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:14:58 by gael              #+#    #+#             */
-/*   Updated: 2023/04/02 19:59:52 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 17:30:07 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,13 @@ typedef struct s_list
 	struct s_list		*next;
 }						t_list;
 
-typedef struct s_arr_output
+typedef struct s_parse
 {
 	char				*word;
 	int					type;
-	struct s_arr_output	*next;
-	struct s_arr_output *prev;
+	struct s_parse	*next;
+	struct s_parse	*prev;
 }						t_parse;
-
-// typedef struct s_mini_sh
-// {
-// 	char			*output;
-// 	char			**env;
-// 	char			***prepare_exec;
-// 	t_parse	*rl_out;
-// 	t_parse	*rl_out_head;
-// }					t_mini_sh;
 
 enum e_type
 {
@@ -100,7 +91,7 @@ typedef struct s_exec_tools
 	int	fd_app;
 	int	fd[2];
 	int	**tab_fd;
-} t_exec_t;
+}		t_exec_t;
 
 typedef struct s_env
 {
@@ -111,33 +102,33 @@ typedef struct s_env
 	int		size;
 	int 	count;
 	int		ite_genv;
-}   t_env;
+}			t_env;
 
 typedef struct s_mini_sh
 {
-	int				check;
-	int 			sep_id;
-	char			*file_heredoc;
-	int				*hr_doc_tab;
-	char			*output;
-	char			**env;
-	int				**prepare_exec_type;
-	char			***prepare_exec;
-	int				len_prepare_exec;
-	int				is_dquote;
-	int				is_squote;
-	int				check_redir;
-	int				sep;
-	int				flag;
-	int				sep_2;
-	int				nbr_word;
-	int				*sep_type;
-	pid_t			*pids;
-	t_env			*data;
-	t_exec_t		*exec;
-	t_parse	*rl_out;
-	t_parse	*rl_out_head;
-}	t_mini_sh;
+	int			check;
+	int 		sep_id;
+	char		*file_heredoc;
+	int			*hr_doc_tab;
+	char		*output;
+	char		**env;
+	int			**prepare_exec_type;
+	char		***prepare_exec;
+	int			len_prepare_exec;
+	int			is_dquote;
+	int			is_squote;
+	int			check_redir;
+	int			sep;
+	int			flag;
+	int			sep_2;
+	int			nbr_word;
+	int			*sep_type;
+	pid_t		*pids;
+	t_env		*data;
+	t_exec_t	*exec;
+	t_parse		*rl_out;
+	t_parse		*rl_out_head;
+}				t_mini_sh;
 // ---------------------------- end struct ---------------------------------- //
 
 //lib/ft_lstadd_back.c
@@ -158,8 +149,8 @@ char	**ft_split(const char *str, char sep);
 //lib/bzero.c
 char	*ft_bzero(char *str, int len);
 //lib/ft_lstnew_word.c
-t_parse *ft_lstnew_malloc(int size);
-t_parse *ft_lstnew_word(char *content, int save, int ite);
+t_parse	*ft_lstnew_malloc(int size);
+t_parse	*ft_lstnew_word(char *content, int save, int ite);
 //lib/ft_strjoin.c
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_dfree(char *s1, char *s2);
@@ -318,5 +309,6 @@ void	close_all(t_mini_sh *mini_sh);
 void	end_prepare_exec(t_mini_sh *mini_sh, int triple);
 void	free_env_sorted(t_mini_sh *mini_sh);
 void	free_data(t_mini_sh *mini_sh);
+char	*is_glue(char *line);
 
 #endif

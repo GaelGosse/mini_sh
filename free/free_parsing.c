@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:56:00 by gael              #+#    #+#             */
-/*   Updated: 2023/04/03 12:10:32 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:18:58 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	free_parsing(t_mini_sh *mini_sh)
 {
 	if (mini_sh->output)
 	{
-		if (!mini_sh->output[0])
-		{
+		// if (!mini_sh->output[0])
+		// {
 			free(mini_sh->output);
 			mini_sh->output = NULL;
 			mini_sh->rl_out = mini_sh->rl_out_head;
@@ -42,7 +42,7 @@ void	free_parsing(t_mini_sh *mini_sh)
 			{
 				ft_lstclear(&mini_sh->rl_out);
 			}
-		}
+		// }
 	}
 }
 

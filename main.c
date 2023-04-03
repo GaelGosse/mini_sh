@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:43:09 by gael              #+#    #+#             */
-/*   Updated: 2023/04/03 12:17:00 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:02:46 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	init_env_2(char **envp, t_mini_sh *mini_sh)
 void	init_prpt(t_mini_sh *mini_sh)
 {
 	mini_sh->output = readline("minishell>");
-	printf(CYAN"mini_sh->output: %p"RESET"\n", mini_sh->output);
 	mini_sh->sep = 0;
 	mini_sh->sep_2 = 0;
 	mini_sh->sep_type = NULL;

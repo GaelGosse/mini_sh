@@ -47,6 +47,7 @@ parsing/expand.c \
 parsing/parsing.c \
 parsing/set_type.c \
 parsing/quote.c \
+parsing/glue.c \
 parsing/remove_quote_2.c \
 parsing/find_var_env.c \
 parsing/ft_find_path.c \

@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:10:55 by gael              #+#    #+#             */
-/*   Updated: 2023/04/03 12:12:10 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:02:54 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,53 +41,6 @@ int	is_built_in(t_mini_sh *mini_sh)
 	return (FAIL);
 }
 
-char	*is_glue(char *line)
-{
-	int		ite;
-	int		glue;
-	char	*tmp;
-
-	glue = 0;
-	ite = 0;
-	while (line[ite])
-	{
-		while (ft_is_sep_parse(line[ite]) == SUCCESS)
-			ite++;
-		while (line[ite] && ft_is_sep_parse(line[ite]) == FAIL)
-		{
-			count_quote_arg(line, &ite);
-			// if ((line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
-			// && (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL))
-			// {
-			// 	printf(RED"all"RESET"\n");
-			// }
-			// else
-			if (line[ite] == '|' && ft_is_sep_parse(line[ite - 1]) == FAIL)
-			{
-				printf(RED"letter left"RESET"\n");
-				glue = ite;
-				printf(BOLD_RED"%s"RST"\n", ft_strdup_len(line, 0, glue));
-			}
-			else if (line[ite] == '|' && ft_is_sep_parse(line[ite + 1]) == FAIL)
-			{
-				printf(RED"letter right"RESET"\n");
-				glue = ite + 1;
-				tmp = ft_strdup_len(line, 0, glue);
-				tmp = ft_strjoin_lfree(tmp, " ");
-				tmp = ft_strjoin_dfree(tmp, ft_strdup_len(line, ft_strlen(tmp) - 1, ft_strlen(line)));
-				printf(BACK_GREEN"%s"RST"\n", tmp);
-				line = tmp;
-				ite = 0;
-				// free(tmp);
-			}
-			ite++;
-		}
-	}
-	(void)tmp;
-	(void)glue;
-	return (line);
-}
-
 void	put_word_in_minish(t_mini_sh *mn_sh, char *lne, int *save, int *ite)
 {
 	t_parse	*new;
@@ -112,7 +65,6 @@ int	build_result_output(t_mini_sh *mini_sh, char *line)
 	int	abc;
 
 	mini_sh->rl_out = NULL;
-	printf(CYAN"mini_sh->rl_out: %p"RESET"\n", mini_sh->rl_out);
 	save = 0;
 	abc = 0;
 	while (line[abc])
