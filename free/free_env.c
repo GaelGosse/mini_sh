@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:58:25 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/02 20:05:09 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 10:31:32 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_data(t_mini_sh *mini_sh)
 {
 	if (mini_sh->data)
 	{
-		printf(RED"free data"RESET"\n");
+		free_env_sorted(mini_sh);
 		free(mini_sh->data);
 		mini_sh->data = NULL;
 	}
@@ -49,7 +49,6 @@ void	free_env_sorted(t_mini_sh *mini_sh)
 	ite_free_env = -1;
 	if (mini_sh->data)
 	{
-		printf(RED"free env sorted"RESET"\n");
 		if (mini_sh->data->env_sorted)
 		{
 			while (mini_sh->data->env_sorted[++ite_free_env])
@@ -61,4 +60,5 @@ void	free_env_sorted(t_mini_sh *mini_sh)
 			mini_sh->data->env_sorted = NULL;
 		}
 	}
+	printf("\n");
 }

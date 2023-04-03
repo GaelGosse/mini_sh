@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:43:09 by gael              #+#    #+#             */
-/*   Updated: 2023/04/02 19:25:13 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/03 10:23:31 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	main(int argc, char *argv[], char **envp)
 		{
 			printf("@exit\n");
 			free_all(&mini_sh);
-			break ;
+			exit (0);
 		}
 		if (mini_sh.output[0])
 			add_history(mini_sh.output);
@@ -67,6 +67,7 @@ int	main(int argc, char *argv[], char **envp)
 		}
 		free_each_prpt(&mini_sh);
 	}
+	printf(BOLD_YELLOW"after rl"RESET"\n");
 	free_all(&mini_sh);
 	(void)argv;
 	return (0);
