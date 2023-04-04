@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:32:17 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/03 15:32:52 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 15:18:27 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char	*is_glue(char *line)
 			{
 				tmp = ft_strdup_len(line, 0, glue);
 				tmp = ft_strjoin_lfree(tmp, " ");
-				tmp = ft_strjoin_dfree(tmp, ft_strdup_len(line, ft_strlen(tmp) - 1, ft_strlen(line)));
+				line = ft_strjoin_dfree(tmp, ft_strdup_len(line, ft_strlen(tmp) - 1, ft_strlen(line)));
 				printf(BACK_GREEN"%s"RST"\n", tmp);
-				line = tmp;
+				// line = tmp;
 				ite = 0;
 			}
 			ite++;

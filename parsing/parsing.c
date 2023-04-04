@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:10:55 by gael              #+#    #+#             */
-/*   Updated: 2023/04/03 18:02:54 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 15:18:32 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	ft_parsing(t_mini_sh *mini_sh)
 	if (check_quote_is_closed(mini_sh->output) > 0)
 	{
 		mini_sh->output = is_glue(mini_sh->output);
+		// is_glue(mini_sh->output, mini_sh);
 		if (build_result_output(mini_sh, mini_sh->output) < 0)
 			return (FAIL);
 		expand(mini_sh);

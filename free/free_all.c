@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 14:50:16 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/03 11:43:26 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 15:12:02 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_each_prpt(t_mini_sh *mini_sh)
 {
 	free_parsing(mini_sh);
 	free_exec(mini_sh);
+	free_tab_fd(mini_sh);
 }
 
 void	free_all(t_mini_sh *mini_sh)

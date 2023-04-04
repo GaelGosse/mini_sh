@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 14:50:24 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/03 11:42:58 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 15:10:54 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,31 @@ void	free_prep_exec(t_mini_sh *mini_sh)
 	mini_sh->prepare_exec = NULL;
 }
 
+void	free_tab_fd(t_mini_sh *mini_sh)
+{
+	int	i_free_fd;
+
+	i_free_fd = 0;
+	if (mini_sh->exec && mini_sh->exec->tab_fd)
+	{
+		while (mini_sh->exec->tab_fd[i_free_fd])
+		{
+			free(mini_sh->exec->tab_fd[i_free_fd]);
+			mini_sh->exec->tab_fd = NULL;
+			i_free_fd++;
+		}
+		free(mini_sh->exec->tab_fd);
+		mini_sh->exec->tab_fd = NULL;
+	}
+}
+
 void	free_exec(t_mini_sh *mini_sh)
 {
 	if (mini_sh->prepare_exec)
 		free_prep_exec(mini_sh);
 	if (mini_sh->prepare_exec_type)
 		free_exectype(mini_sh);
+	
 	if (mini_sh->sep_type)
 		free(mini_sh->sep_type);
 	if (mini_sh->exec)

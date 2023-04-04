@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:14:58 by gael              #+#    #+#             */
-/*   Updated: 2023/04/03 17:30:07 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 13:06:17 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,5 +310,6 @@ void	end_prepare_exec(t_mini_sh *mini_sh, int triple);
 void	free_env_sorted(t_mini_sh *mini_sh);
 void	free_data(t_mini_sh *mini_sh);
 char	*is_glue(char *line);
+void	free_tab_fd(t_mini_sh *mini_sh);
 
 #endif
