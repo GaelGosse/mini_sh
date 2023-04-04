@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:33:14 by mael              #+#    #+#             */
-/*   Updated: 2023/04/03 11:48:40 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 16:58:31 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	init_sep_type(t_mini_sh *mini_sh)
 	int		i;
 
 	tmp = mini_sh->rl_out_head;
+	// if (mini_sh->sep_type)
+	// {
+	// 	free(mini_sh->sep_type);
+	// 	mini_sh->sep_type = NULL;
+	// }
 	mini_sh->sep_type = (int*)malloc(sizeof(int) * (mini_sh->sep_2 + 1));
 	if (!mini_sh->sep_type)
 		return (FAIL_MALLOC);
@@ -99,11 +104,12 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 	i_init_fd = 0;
 	if (mini_sh->sep_2 == 0)
 		return (opening_redir_r_file(mini_sh, tmp, i_init_fd));
+	free_tab_fd(mini_sh);
+	mini_sh->exec->tab_fd = NULL;
 	mini_sh->exec->tab_fd = malloc(sizeof(int *) * (mini_sh->sep_2 + 1));
+	printf(RED"tab_fd malloc here"RESET"\n");
 	if (!mini_sh->exec->tab_fd)
 		return (FAIL_MALLOC);
-	mini_sh->exec->tab_fd[mini_sh->sep_2] = 0;
-	
 	while (tmp)
 	{
 		if (!tmp)
@@ -128,6 +134,7 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 		i_init_fd++;
 		tmp = tmp->next;
 	}
+	mini_sh->exec->tab_fd[i_init_fd] = NULL;
 	return (SUCCESS);
 	(void)i_init_fd;
 }
@@ -191,8 +198,9 @@ void	child_process(t_mini_sh *mini_sh, int i_exec)
 {
 	if (init_fd_exec(mini_sh, i_exec) == FAIL)
 		exit (1);
-	fprintf(stderr, "fd_in: %i\n", mini_sh->exec->fd_in);
-	fprintf(stderr, "fd_out: %i\n\n", mini_sh->exec->fd_out);
+	fprintf(stderr, BOLD_PURPLE"cmd: "BACK_PURPLE"%s"RST"\n", mini_sh->prepare_exec[i_exec][0]);
+	fprintf(stderr, PURPLE"fd_in: %i"RST"\n", mini_sh->exec->fd_in);
+	fprintf(stderr, PURPLE"fd_out: %i"RST"\n\n", mini_sh->exec->fd_out);
 	dup2(mini_sh->exec->fd_in, 0);
 	dup2(mini_sh->exec->fd_out, 1);
 	close_all(mini_sh);

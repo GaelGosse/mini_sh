@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 14:10:55 by gael              #+#    #+#             */
-/*   Updated: 2023/04/04 15:18:32 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 18:34:24 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ int	build_result_output(t_mini_sh *mini_sh, char *line)
 	mini_sh->rl_out = NULL;
 	save = 0;
 	abc = 0;
+	ite = 0;
+	if (!mini_sh->output[0])
+		return (FAIL);
 	while (line[abc])
 		abc++;
-	ite = 0;
 	while (line[ite])
 	{
 		while (ft_is_sep_parse(line[ite]) == SUCCESS)
@@ -91,8 +93,8 @@ int	ft_parsing(t_mini_sh *mini_sh)
 	mini_sh->is_squote = FAIL;
 	if (check_quote_is_closed(mini_sh->output) > 0)
 	{
-		mini_sh->output = is_glue(mini_sh->output);
-		// is_glue(mini_sh->output, mini_sh);
+		// mini_sh->output = is_glue(mini_sh->output);
+		is_glue(mini_sh);
 		if (build_result_output(mini_sh, mini_sh->output) < 0)
 			return (FAIL);
 		expand(mini_sh);

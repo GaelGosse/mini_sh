@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:04:44 by gael              #+#    #+#             */
-/*   Updated: 2023/04/01 17:10:57 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 17:43:36 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_parse	*ft_lstnew_word(char *content, int save, int ite)
 	t_parse	*new;
 
 	new = (t_parse *)malloc(sizeof(t_parse));
+	printf("c1\n");
 	if (!new)
 		return (NULL);
 	new->type = 0;

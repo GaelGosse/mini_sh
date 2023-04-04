@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   which_sep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mael <mael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 13:29:33 by mael              #+#    #+#             */
-/*   Updated: 2023/03/26 18:08:12 by mael             ###   ########.fr       */
+/*   Updated: 2023/04/04 16:15:22 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_exec(t_mini_sh *mini_sh)
 	mini_sh->exec->fd_app = 0;
 	mini_sh->exec->fd[0] = 0;
 	mini_sh->exec->fd[1] = 0;
+	mini_sh->exec->tab_fd = NULL;
 	return (SUCCESS);
 }
 

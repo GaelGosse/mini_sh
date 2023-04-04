@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 14:50:24 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/04 15:10:54 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 17:04:31 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,25 @@ void	free_tab_fd(t_mini_sh *mini_sh)
 	i_free_fd = 0;
 	if (mini_sh->exec && mini_sh->exec->tab_fd)
 	{
-		while (mini_sh->exec->tab_fd[i_free_fd])
+		// printf(RED"first if"RESET"\n");
+		while (mini_sh->exec->tab_fd && mini_sh->exec->tab_fd[i_free_fd])
 		{
 			free(mini_sh->exec->tab_fd[i_free_fd]);
 			mini_sh->exec->tab_fd = NULL;
 			i_free_fd++;
 		}
+		// printf(RED"free tab fd"RESET"\n");
 		free(mini_sh->exec->tab_fd);
 		mini_sh->exec->tab_fd = NULL;
 	}
+	// else
+	// {
+	// 	printf(CYAN"%p"RESET, mini_sh->exec);
+	// 	if (mini_sh->exec)
+	// 		printf(CYAN"->%p"RESET"\n", mini_sh->exec->tab_fd);
+	// 	else
+	// 		printf("\n");
+	// }
 }
 
 void	free_exec(t_mini_sh *mini_sh)
@@ -79,9 +89,12 @@ void	free_exec(t_mini_sh *mini_sh)
 		free_prep_exec(mini_sh);
 	if (mini_sh->prepare_exec_type)
 		free_exectype(mini_sh);
-	
+	free_tab_fd(mini_sh);
 	if (mini_sh->sep_type)
+	{
 		free(mini_sh->sep_type);
+		mini_sh->sep_type = NULL;
+	}
 	if (mini_sh->exec)
 	{
 		free(mini_sh->exec);

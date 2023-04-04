@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:43:09 by gael              #+#    #+#             */
-/*   Updated: 2023/04/04 13:08:18 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/04 19:03:27 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_prpt(t_mini_sh *mini_sh)
 	mini_sh->data = NULL;
 	mini_sh->exec = NULL;
 	mini_sh->pids = NULL;
+	mini_sh->rl_out = NULL;
 	(void)mini_sh;
 }
 
@@ -66,6 +67,11 @@ int	main(int argc, char *argv[], char **envp)
 			init_exec(&mini_sh);
 			init_tab_fd(&mini_sh);
 			start_exec(&mini_sh);
+		}
+		if (mini_sh.exec->tab_fd)
+		{
+			free(mini_sh.exec->tab_fd);
+			mini_sh.exec->tab_fd = NULL;
 		}
 		free_each_prpt(&mini_sh);
 	}
