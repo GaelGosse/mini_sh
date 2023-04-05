@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:33:14 by mael              #+#    #+#             */
-/*   Updated: 2023/04/04 16:58:31 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/05 15:24:43 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 	free_tab_fd(mini_sh);
 	mini_sh->exec->tab_fd = NULL;
 	mini_sh->exec->tab_fd = malloc(sizeof(int *) * (mini_sh->sep_2 + 1));
-	printf(RED"tab_fd malloc here"RESET"\n");
+	printf(RED"malloc tab_fd"RESET"\n");
 	if (!mini_sh->exec->tab_fd)
 		return (FAIL_MALLOC);
 	while (tmp)
@@ -119,12 +119,12 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 		if (!tmp)
 			break ;
 		mini_sh->exec->tab_fd[i_init_fd] = malloc(sizeof(int) * 3);
+		printf(BOLD_RED"malloc tab fd pipe"RESET"\n");
 		mini_sh->exec->tab_fd[i_init_fd][2] = 0;
 		if (pipe(mini_sh->exec->tab_fd[i_init_fd]) == -1)
 			return (printf(BACK_RED"pipe not working"RST"\n"), FAIL);
 		if (tmp && tmp->type == PIPE && is_sep_int(tmp->next->type) == SUCCESS)
 		{
-			// write 0 on [0 or 1]
 			close(mini_sh->exec->tab_fd[i_init_fd][0]);
 			mini_sh->exec->tab_fd[i_init_fd][0] = 0;
 			tmp = tmp->next;
