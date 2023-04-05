@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 02:21:41 by gael              #+#    #+#             */
-/*   Updated: 2023/04/02 16:44:29 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/05 18:03:32 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	expand(t_mini_sh *mini_sh)
 {
 	int	i_dollar;
 
-	i_dollar = FAIL;
+	i_dollar = ft_isthere_dollar(mini_sh);
 	mini_sh->rl_out = mini_sh->rl_out_head;
 	while (mini_sh->rl_out)
 	{
