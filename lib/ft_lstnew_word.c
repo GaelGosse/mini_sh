@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_word.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:04:44 by gael              #+#    #+#             */
-/*   Updated: 2023/04/04 17:43:36 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/09 21:44:01 by gael             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_parse	*ft_lstnew_word(char *content, int save, int ite)
 	t_parse	*new;
 
 	new = (t_parse *)malloc(sizeof(t_parse));
-	printf("c1\n");
 	if (!new)
 		return (NULL);
 	new->type = 0;
