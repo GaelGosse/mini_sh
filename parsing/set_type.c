@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 23:12:05 by gael              #+#    #+#             */
-/*   Updated: 2023/04/02 17:29:47 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:54:29 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	type_utils_2(t_mini_sh *mini_sh)
 		if (ft_strlen(mini_sh->rl_out->word) == 2)
 			mini_sh->rl_out->type = APPEND;
 		else
-			return (printf("minishell: syntax error with >>"), FAIL);
+			return (printf("minishell: syntax error with >>\n"), FAIL);
 	}
 	else if (ft_strncmp("<<", mini_sh->rl_out->word, 1) == 0
 		&& mini_sh->rl_out->type == FAIL)
@@ -39,10 +39,10 @@ int	type_utils_2(t_mini_sh *mini_sh)
 		if (ft_strlen(mini_sh->rl_out->word) == 2)
 			mini_sh->rl_out->type = HR_DOC;
 		else
-			return (printf("minishell: syntax error with <<"), FAIL);
+			return (printf("minishell: syntax error with <<\n"), FAIL);
 	}
-	if (mini_sh->rl_out->prev && mini_sh->rl_out->prev->type == HR_DOC)
-		mini_sh->rl_out->type = EOFL;
+	// if (mini_sh->rl_out->prev && mini_sh->rl_out->prev->type == HR_DOC)
+	// 	mini_sh->rl_out->type = EOFL;
 	return (SUCCESS);
 }
 
@@ -54,7 +54,7 @@ int	type_utils_3(t_mini_sh *mini_sh)
 		if (ft_strlen(mini_sh->rl_out->word) == 1)
 			mini_sh->rl_out->type = REDIR_R;
 		else
-			return (printf("minishell: syntax error with >"), FAIL);
+			return (printf("minishell: syntax error with >\n"), FAIL);
 	}
 	else if (ft_strncmp("<", mini_sh->rl_out->word, 0) == 0
 		&& mini_sh->rl_out->type == FAIL)
@@ -62,7 +62,7 @@ int	type_utils_3(t_mini_sh *mini_sh)
 		if (ft_strlen(mini_sh->rl_out->word) == 1)
 			mini_sh->rl_out->type = REDIR_L;
 		else
-			return (printf("minishell: syntax error with <"), FAIL);
+			return (printf("minishell: syntax error with <\n"), FAIL);
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 14:50:24 by ggosse            #+#    #+#             */
-/*   Updated: 2023/04/04 17:04:31 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/10 10:43:10 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	free_tab_fd(t_mini_sh *mini_sh)
 	int	i_free_fd;
 
 	i_free_fd = 0;
+	// printf(RED"free tab fd"RESET"\n");
 	if (mini_sh->exec && mini_sh->exec->tab_fd)
 	{
 		// printf(RED"first if"RESET"\n");

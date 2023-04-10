@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:33:14 by mael              #+#    #+#             */
-/*   Updated: 2023/04/05 15:24:43 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/10 10:36:43 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	init_sep_type(t_mini_sh *mini_sh)
 	int		i;
 
 	tmp = mini_sh->rl_out_head;
-	// if (mini_sh->sep_type)
-	// {
-	// 	free(mini_sh->sep_type);
-	// 	mini_sh->sep_type = NULL;
-	// }
+	if (mini_sh->sep_type)
+	{
+		free(mini_sh->sep_type);
+		mini_sh->sep_type = NULL;
+	}
 	mini_sh->sep_type = (int*)malloc(sizeof(int) * (mini_sh->sep_2 + 1));
 	if (!mini_sh->sep_type)
 		return (FAIL_MALLOC);
@@ -101,16 +101,15 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 	t_parse	*tmp;
 
 	tmp = mini_sh->rl_out_head;
-	i_init_fd = 0;
+	i_init_fd = -1;
 	if (mini_sh->sep_2 == 0)
 		return (opening_redir_r_file(mini_sh, tmp, i_init_fd));
 	free_tab_fd(mini_sh);
 	mini_sh->exec->tab_fd = NULL;
 	mini_sh->exec->tab_fd = malloc(sizeof(int *) * (mini_sh->sep_2 + 1));
-	printf(RED"malloc tab_fd"RESET"\n");
 	if (!mini_sh->exec->tab_fd)
 		return (FAIL_MALLOC);
-	while (tmp)
+	while (tmp && ++i_init_fd < mini_sh->sep_2)
 	{
 		if (!tmp)
 			break ;
@@ -119,7 +118,6 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 		if (!tmp)
 			break ;
 		mini_sh->exec->tab_fd[i_init_fd] = malloc(sizeof(int) * 3);
-		printf(BOLD_RED"malloc tab fd pipe"RESET"\n");
 		mini_sh->exec->tab_fd[i_init_fd][2] = 0;
 		if (pipe(mini_sh->exec->tab_fd[i_init_fd]) == -1)
 			return (printf(BACK_RED"pipe not working"RST"\n"), FAIL);
@@ -131,12 +129,10 @@ int	init_tab_fd(t_mini_sh *mini_sh)
 		}
 		if (tmp)
 			opening_redir_r_file(mini_sh, tmp, i_init_fd);
-		i_init_fd++;
 		tmp = tmp->next;
 	}
 	mini_sh->exec->tab_fd[i_init_fd] = NULL;
 	return (SUCCESS);
-	(void)i_init_fd;
 }
 
 int	exec_builtin(t_mini_sh *mini_sh, int i)
@@ -150,7 +146,6 @@ int	exec_builtin(t_mini_sh *mini_sh, int i)
 	}
 	return (FAIL);
 }
-
 
 int	exec_redir(t_mini_sh *mini_sh, int i_exec)
 {
@@ -233,15 +228,6 @@ int	start_exec(t_mini_sh *mini_sh)
 		i_exec++;
 	}
 	close_all(mini_sh);
-	// i_exec = 0;
-	// while (i_exec < mini_sh->sep_2)
-	// {
-	// 	if (mini_sh->exec->tab_fd[i_exec][0] > 2)
-	// 		close(mini_sh->exec->tab_fd[i_exec][0]);
-	// 	if (mini_sh->exec->tab_fd[i_exec][1] > 2)
-	// 		close(mini_sh->exec->tab_fd[i_exec][1]);
-	// 	i_exec++;
-	// }
 	i_exec = 0;
 	while (mini_sh->prepare_exec[i_exec])
 	{

@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:10:09 by mael              #+#    #+#             */
-/*   Updated: 2023/04/03 10:37:52 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/10 09:29:04 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ int	do_built_in(t_mini_sh *mini_sh, int i)
 //	while (mini_sh->prepare_exec[i])
 //	{
 		if (is_built_in_2(i, mini_sh) == FAIL)
+		{
+			free_env_sorted(mini_sh);
+			free_data(mini_sh);
 			return (FAIL);
+		}
 //		i++;
 //	}
 	 //exit(1);

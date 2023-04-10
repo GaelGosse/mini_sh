@@ -6,7 +6,7 @@
 /*   By: ggosse <ggosse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 13:52:27 by gael              #+#    #+#             */
-/*   Updated: 2023/04/02 16:27:43 by ggosse           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:09:35 by ggosse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	prepare_exec(t_mini_sh *mini_sh)
 		fill_little_tab(mini_sh, triple);
 		triple++;
 		if (!mini_sh->rl_out->next)
-			break ;
+			break ; 
 		else
 		{
 			while (is_sep(mini_sh->rl_out->word) == SUCCESS)
